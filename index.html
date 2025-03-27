@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurology Discussion (1)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            user-select: none; /* يمنع تحديد النص */
+            -webkit-user-select: none; /* لمتصفحات WebKit مثل Chrome وSafari */
+            -moz-user-select: none; /* لمتصفح Firefox */
+            -ms-user-select: none; /* لمتصفح Internet Explorer/Edge */
+        }
+        @media print { /* إخفاء الصفحة عند الطباعة */
+            body { 
+                display: none;
+            }
+        }
+
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .timer {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .question-result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        img {
+            pointer-events: none; /* يمنع سحب الصور */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Neurology Discussion (1)</h1>
+        <div class="timer" id="timer">Time remaining: 60 seconds</div>
+
+        <div class="question" id="question-1">
+            <p>23-year-old man is referred to neurology clinic. He describes episodes of leg weakness following bouts of laughing whilst out with friends. The following weekend his friends described a brief collapse following a similar episode. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Stokes-Adams attack"> Stokes-Adams attack</label>
+                <label><input type="radio" name="q1" value="Cataplexy"> Cataplexy</label>
+                <label><input type="radio" name="q1" value="Hypokalemic periodic paralysis"> Hypokalemic periodic paralysis</label>
+                <label><input type="radio" name="q1" value="Absence seizure"> Absence seizure</label>
+                <label><input type="radio" name="q1" value="Myasthenia gravis"> Myasthenia gravis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-2">
+            <p>An 83 year old woman is brought to the emergency department after becoming unwell at home. Which of the following is true of stroke?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="It is caused by occlusion of small perforating arteries"> It is caused by occlusion of small perforating arteries</label>
+                <label><input type="radio" name="q2" value="It includes higher cerebral dysfunction and motor loss"> It includes higher cerebral dysfunction and motor loss</label>
+                <label><input type="radio" name="q2" value="It involves isolated homonymous hemianopia"> It involves isolated homonymous hemianopia</label>
+                <label><input type="radio" name="q2" value="It is not caused by cerebral embolism"> It is not caused by cerebral embolism</label>
+                <label><input type="radio" name="q2" value="It is a pure motor stroke"> It is a pure motor stroke</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-3">
+            <p>In monoplegia, usually the site of lesion lies in:</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="Pons"> Pons</label>
+                <label><input type="radio" name="q3" value="Internal capsule"> Internal capsule</label>
+                <label><input type="radio" name="q3" value="Cortex"> Cortex</label>
+                <label><input type="radio" name="q3" value="Midbrain"> Midbrain</label>
+                <label><input type="radio" name="q3" value="Thalamus"> Thalamus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-4">
+            <p>MRI is preferred over CT scan of brain in all except:</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="Posterior fossa tumours"> Posterior fossa tumours</label>
+                <label><input type="radio" name="q4" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q4" value="Pituitary tumours"> Pituitary tumours</label>
+                <label><input type="radio" name="q4" value="Calcification within a lesion"> Calcification within a lesion</label>
+                <label><input type="radio" name="q4" value="Syringomyelia"> Syringomyelia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-5">
+            <p>A 74-year-old woman has a recent diagnosis of small-cell lung cancer. She is now complaining of headaches, and her family has noticed confusion as well. Metastatic disease to the brain is suspected. A mass lesion on magnetic resonance imaging (MRI) is demonstrated in the right parietal lobe. Which MRI technique would best identify the extent of the edema surrounding the lesion?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Magnetic resonance angiography"> Magnetic resonance angiography</label>
+                <label><input type="radio" name="q5" value="Fluid-attenuated inversion recovery (FLAIR)"> Fluid-attenuated inversion recovery (FLAIR)</label>
+                <label><input type="radio" name="q5" value="T1-weighted"> T1-weighted</label>
+                <label><input type="radio" name="q5" value="T2-weighted"> T2-weighted</label>
+                <label><input type="radio" name="q5" value="B and D"> B and D</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-6">
+            <p>You review a 70-year-old woman four days after she was admitted with a suspected stroke. Unfortunately she has been left with right sided sensory loss affecting her arms more than the legs and a right sided homonymous hemianopia. Functionally she has difficulty dressing her self. Examination of her cranial nerves is unremarkable. What area is the stroke most likely to have affected?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="Middle cerebral artery"> Middle cerebral artery</label>
+                <label><input type="radio" name="q6" value="Lacunar"> Lacunar</label>
+                <label><input type="radio" name="q6" value="Anterior cerebral artery"> Anterior cerebral artery</label>
+                <label><input type="radio" name="q6" value="Posterior cerebral artery"> Posterior cerebral artery</label>
+                <label><input type="radio" name="q6" value="Posterior inferior cerebellar artery"> Posterior inferior cerebellar artery</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-7">
+            <p>Thrombosis of left middle cerebral artery may give rise to:</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Diplopia"> Diplopia</label>
+                <label><input type="radio" name="q7" value="Paralysis of conjugate gaze towards left"> Paralysis of conjugate gaze towards left</label>
+                <label><input type="radio" name="q7" value="Right homonymous hemianopia"> Right homonymous hemianopia</label>
+                <label><input type="radio" name="q7" value="Hemiplegia of the right side where affection of leg is more than arm"> Hemiplegia of the right side where affection of leg is more than arm</label>
+                <label><input type="radio" name="q7" value="Right monocular loss of vision"> Right monocular loss of vision</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-8">
+            <p>The ROSIER (Rule Out Stroke In the Emergency Room) clinical stroke tool can be used to triage patients with clinical suspicion of stroke. Which of the following features are given a negative score on the ROSIER scale (i.e. are not thought to be consistent with a clinical diagnosis of stroke)?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="Leg weakness"> Leg weakness</label>
+                <label><input type="radio" name="q8" value="Loss of speech"> Loss of speech</label>
+                <label><input type="radio" name="q8" value="Seizure"> Seizure</label>
+                <label><input type="radio" name="q8" value="Unilateral arm weakness"> Unilateral arm weakness</label>
+                <label><input type="radio" name="q8" value="Visual field defect"> Visual field defect</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-9">
+            <p>Psychiatric illness rather than an organic brain disorder is suggested by:</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="Onset for the first time at the age of 55 years"> Onset for the first time at the age of 55 years</label>
+                <label><input type="radio" name="q9" value="A family history of major psychiatric illness"> A family history of major psychiatric illness</label>
+                <label><input type="radio" name="q9" value="Impaired short term memory"> Impaired short term memory</label>
+                <label><input type="radio" name="q9" value="No previous history of psychiatric illness"> No previous history of psychiatric illness</label>
+                <label><input type="radio" name="q9" value="Clouding of consciousness"> Clouding of consciousness</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-10">
+            <p>Which is not a feature of UMN palsy:</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Spasticity"> Spasticity</label>
+                <label><input type="radio" name="q10" value="Babinski's sign"> Babinski's sign</label>
+                <label><input type="radio" name="q10" value="Clonus"> Clonus</label>
+                <label><input type="radio" name="q10" value="Fasciculations"> Fasciculations</label>
+                <label><input type="radio" name="q10" value="Hyperreflexia"> Hyperreflexia</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11- All are characteristic of LMN lesion EXCEPT:</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="Weakness and wasting"> Weakness and wasting</label>
+                <label><input type="radio" name="q11" value="Absent superficial reflex"> Absent superficial reflex</label>
+                <label><input type="radio" name="q11" value="Extensor plantar response"> Extensor plantar response</label>
+                <label><input type="radio" name="q11" value="Brisk deep reflexes"> Brisk deep reflexes</label>
+                <label><input type="radio" name="q11" value="Flaccidity of muscles"> Flaccidity of muscles</label>
+            </div>
+        </div>
+        <div class="question" id="question-12">
+            <p>12- A patient is admitted with a clinical picture of acute stroke. You request a plain CT scan as initial emergency brain imaging. What information can you get from plain (non-contrast) CT brain scanning in acute stroke patients?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="Distinguishes acute stroke from TIA"> Distinguishes acute stroke from TIA</label>
+                <label><input type="radio" name="q12" value="Reliably detects intracerebral blood"> Reliably detects intracerebral blood</label>
+                <label><input type="radio" name="q12" value="Reliably detects subtle acute ischaemic changes"> Reliably detects subtle acute ischaemic changes</label>
+                <label><input type="radio" name="q12" value="Shows brain function (functional imaging)"> Shows brain function (functional imaging)</label>
+                <label><input type="radio" name="q12" value="Shows blood flow in vessels"> Shows blood flow in vessels</label>
+            </div>
+        </div>
+        <div class="question" id="question-13">
+            <p>13- A 65 year old woman with a previous history of diabetes and breast carcinoma is found collapsed at home with drowsiness and a left hemiparesis. Which of the following should be carried out first?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="Check blood glucose level"> Check blood glucose level</label>
+                <label><input type="radio" name="q13" value="Check temperature"> Check temperature</label>
+                <label><input type="radio" name="q13" value="Clarify breast carcinoma history"> Clarify breast carcinoma history</label>
+                <label><input type="radio" name="q13" value="Examine for peripheral neuropathy"> Examine for peripheral neuropathy</label>
+                <label><input type="radio" name="q13" value="Examine for symmetrical plantar responses"> Examine for symmetrical plantar responses</label>
+            </div>
+        </div>
+        <div class="question" id="question-14">
+            <p>14- A 76-year-old man is admitted with a right hemiparesis. He first noticed weakness on his right side around six hours ago. A CT scan shows an ischaemic stroke and aspirin 300mg is commenced. terms of further management in the acute phase, which one of the following values should not be corrected?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="BP 210/110"> BP 210/110</label>
+                <label><input type="radio" name="q14" value="Blood glucose 11.2 mmol/l"> Blood glucose 11.2 mmol/l</label>
+                <label><input type="radio" name="q14" value="Oxygen saturation 90%"> Oxygen saturation 90%</label>
+                <label><input type="radio" name="q14" value="Temp 38.3°C"> Temp 38.3°C</label>
+                <label><input type="radio" name="q14" value="Blood glucose 3.5 mmol/l"> Blood glucose 3.5 mmol/l</label>
+            </div>
+        </div>
+        <div class="question" id="question-15">
+            <p>15- A 54-year-old man is admitted to the Emergency Department with a left hemiplegia. His symptoms started around 5 hours ago and he has had no headache, visual disturbance or loss of consciousness. On examination a dense left hemiplegia is noted Blood pressure is 120/78 mmHg. GCS is 15/15 and pupils are equal and reactive to light. An urgent CT scan is performed shortly after his arrival This demonstrates no abnormality. What is the most appropriate initial management?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="Enoxaparin"> Enoxaparin</label>
+                <label><input type="radio" name="q15" value="Alteplase"> Alteplase</label>
+                <label><input type="radio" name="q15" value="Dexamethasone"> Dexamethasone</label>
+                <label><input type="radio" name="q15" value="Warfarin"> Warfarin</label>
+                <label><input type="radio" name="q15" value="Aspirin"> Aspirin</label>
+            </div>
+        </div>
+        <div class="question" id="question-16">
+            <p>16- A 73 year old man presents with a right hemiparesis and expressive dysphasia secondary to an infarct in the territory of the left middle cerebral artery. Blood pressure is 153/82 mmHg, serum cholesterol is 4.4 mmol/L (170 mg/dL) and the electrocardiogram (EGG) shows sinus rhythm with no abnormalities. Which of the following secondary prevention medications is usually avoided in such a patient?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="Aspirin"> Aspirin</label>
+                <label><input type="radio" name="q16" value="Ramipril"> Ramipril</label>
+                <label><input type="radio" name="q16" value="Simvastatin"> Simvastatin</label>
+                <label><input type="radio" name="q16" value="Warfarin"> Warfarin</label>
+            </div>
+        </div>
+        <div class="question" id="question-17">
+            <p>17- A 70 year old man with recent minor stroke is found to be in atrial fibrillation. When advising him on anticoagulant therapy, which of the following features would make you favour warfarin over a direct oral anticoagulant (DOAC)?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="Fewer drug interactions"> Fewer drug interactions</label>
+                <label><input type="radio" name="q17" value="Lower drug costs"> Lower drug costs</label>
+                <label><input type="radio" name="q17" value="Lower risk of intracerebral haemorrhage"> Lower risk of intracerebral haemorrhage</label>
+                <label><input type="radio" name="q17" value="More effective at preventing embolism"> More effective at preventing embolism</label>
+                <label><input type="radio" name="q17" value="Simpler dosing regimes"> Simpler dosing regimes</label>
+            </div>
+        </div>
+        <div class="question" id="question-18">
+            <p>18- A 59-year-old man with no significant past medical history is admitted to hospital following an ischaemic stroke He presented outside of the thrombolysis window and is treated with aspirin for the first few days. His blood pressure is 130/80 mmHg. fasting glucose is 5.6 mmol/I and fasting cholesterol is 3.9 mmol/l He makes a good recovery and has regained nearly all of his previous functions upon discharge. Following recent NICE guidelines, which of the following medications should he be taking upon discharge (i.e. after 14 days)?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="Aspirin + statin"> Aspirin + statin</label>
+                <label><input type="radio" name="q18" value="Aspirin + dipyridamole + statin + ramipril"> Aspirin + dipyridamole + statin + ramipril</label>
+                <label><input type="radio" name="q18" value="Clopidogrel + statin"> Clopidogrel + statin</label>
+                <label><input type="radio" name="q18" value="Aspirin + dipyridamole"> Aspirin + dipyridamole</label>
+                <label><input type="radio" name="q18" value="Aspirin + dipyridamole + statin"> Aspirin + dipyridamole + statin</label>
+            </div>
+        </div>
+        <div class="question" id="question-19">
+            <p>19- A 71-year-old man is reviewed following an ischaemic stroke. He is known to be intolerant of clopidogrel. What is the most appropriate therapy to help reduce his chance of having a further stroke?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="Aspirin + dipyridamole. Stop dipyridamole after 2 years"> Aspirin + dipyridamole. Stop dipyridamole after 2 years</label>
+                <label><input type="radio" name="q19" value="Dipyridamole. Stop dipyridamole after 2 years"> Dipyridamole. Stop dipyridamole after 2 years</label>
+                <label><input type="radio" name="q19" value="Aspirin lifelong"> Aspirin lifelong</label>
+                <label><input type="radio" name="q19" value="Warfarin"> Warfarin</label>
+                <label><input type="radio" name="q19" value="Aspirin + dipyridamole lifelong"> Aspirin + dipyridamole lifelong</label>
+            </div>
+        </div>
+        <div class="question" id="question-20">
+            <p>20- A 62 year old man with a stroke is being considered for thrombolysis therapy. Which of the following is true of intravenous thrombolysis with recombinant tissue plasminogen activator (rt-PA)?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="It can be given up to 12 hours after symptom onset"> It can be given up to 12 hours after symptom onset</label>
+                <label><input type="radio" name="q20" value="It can be offered to most stroke patients"> It can be offered to most stroke patients</label>
+                <label><input type="radio" name="q20" value="It improves the chance of recovery of independence"> It improves the chance of recovery of independence</label>
+                <label><input type="radio" name="q20" value="It reduces the risk of early death"> It reduces the risk of early death</label>
+                <label><input type="radio" name="q20" value="It reduces the risk of early intracerebral haemorrhage"> It reduces the risk of early intracerebral haemorrhage</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-21">
+            <p>21- A patient with an acute stroke is admitted to the specialist stroke unit. Which of the following currently apply to mechanical clot retrieval (thrombectomy)?</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="It can be offered to most stroke patients"> It can be offered to most stroke patients</label>
+                <label><input type="radio" name="q21" value="It is effective in intracerebral haemorrhage"> It is effective in intracerebral haemorrhage</label>
+                <label><input type="radio" name="q21" value="It is effective in large-vessel occlusion"> It is effective in large-vessel occlusion</label>
+                <label><input type="radio" name="q21" value="It requires less technological support than intravenous thrombolysis"> It requires less technological support than intravenous thrombolysis</label>
+                <label><input type="radio" name="q21" value="It is a treatment that is widely available"> It is a treatment that is widely available</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-22">
+            <p>22- Commonest causes of embolic stroke ??</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="Paroxysmal nocturnal hemoglobinuria"> Paroxysmal nocturnal hemoglobinuria</label>
+                <label><input type="radio" name="q22" value="Rheumatic heart disease"> Rheumatic heart disease</label>
+                <label><input type="radio" name="q22" value="Cardiac prosthetic valves"> Cardiac prosthetic valves</label>
+                <label><input type="radio" name="q22" value="Dilated cardiomyopathy"> Dilated cardiomyopathy</label>
+                <label><input type="radio" name="q22" value="AF"> AF</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-23">
+            <p>23- Commonest cause of cerebral embolism ??</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="Paroxysmal nocturnal hemoglobinuria"> Paroxysmal nocturnal hemoglobinuria</label>
+                <label><input type="radio" name="q23" value="Libman sacks endocarditis"> Libman sacks endocarditis</label>
+                <label><input type="radio" name="q23" value="Leukaemia"> Leukaemia</label>
+                <label><input type="radio" name="q23" value="Multiple myeloma"> Multiple myeloma</label>
+                <label><input type="radio" name="q23" value="Anti phospholipid syndrome"> Anti phospholipid syndrome</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-24">
+            <p>24- All of the following are sources of cerebral embolism except:</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="Tricuspid incompetence with occasional ectopics"> Tricuspid incompetence with occasional ectopics</label>
+                <label><input type="radio" name="q24" value="Left ventricular aneurysm"> Left ventricular aneurysm</label>
+                <label><input type="radio" name="q24" value="Left atrial myxoma"> Left atrial myxoma</label>
+                <label><input type="radio" name="q24" value="Subacute bacterial endocarditis"> Subacute bacterial endocarditis</label>
+                <label><input type="radio" name="q24" value="Fracture of long bone"> Fracture of long bone</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-25">
+            <p>25- A 25-year-old female is found to have a left hemiparesis following a deep vein thrombosis. An ECG shows RBBB with right axis deviation. What is the most likely underlying diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="Ventricular septal defect"> Ventricular septal defect</label>
+                <label><input type="radio" name="q25" value="Patent ductus arteriosus"> Patent ductus arteriosus</label>
+                <label><input type="radio" name="q25" value="Ostium primum atrial septal defect"> Ostium primum atrial septal defect</label>
+                <label><input type="radio" name="q25" value="Ostium secundum atrial septal defect"> Ostium secundum atrial septal defect</label>
+                <label><input type="radio" name="q25" value="Tetralogy of Fallot"> Tetralogy of Fallot</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-26">
+            <p>26- Transient ischaemic attack (TIA) stamps the process as:</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="Embolic"> Embolic</label>
+                <label><input type="radio" name="q26" value="Demyelinating"> Demyelinating</label>
+                <label><input type="radio" name="q26" value="Hemorrhagic"> Hemorrhagic</label>
+                <label><input type="radio" name="q26" value="Inflammatory"> Inflammatory</label>
+                <label><input type="radio" name="q26" value="Vasospasm"> Vasospasm</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-27">
+            <p>27- Commonest symptom of TIA is ..</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="slurred speech"> slurred speech</label>
+                <label><input type="radio" name="q27" value="Hemiplegia"> Hemiplegia</label>
+                <label><input type="radio" name="q27" value="Paraplegia"> Paraplegia</label>
+                <label><input type="radio" name="q27" value="Facial nerve paralysis"> Facial nerve paralysis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-28">
+            <p>28- Disorder of language of cerebral origin is ..</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="Dysarthria"> Dysarthria</label>
+                <label><input type="radio" name="q28" value="Dysphonia"> Dysphonia</label>
+                <label><input type="radio" name="q28" value="Aphasia"> Aphasia</label>
+                <label><input type="radio" name="q28" value="Monotonous speech"> Monotonous speech</label>
+                <label><input type="radio" name="q28" value="Staccato speech"> Staccato speech</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-29">
+            <p>29- A patient is referred by his doctor to the hospital stroke service. Which of the following transient symptoms would allow you to make a clinical diagnosis of transient ischaemic attack (TlA)?</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="Dizziness"> Dizziness</label>
+                <label><input type="radio" name="q29" value="Expressive dysphasia"> Expressive dysphasia</label>
+                <label><input type="radio" name="q29" value="Loss of consciousness"> Loss of consciousness</label>
+                <label><input type="radio" name="q29" value="Slurred speech (dysarthria)"> Slurred speech (dysarthria)</label>
+                <label><input type="radio" name="q29" value="Transient confusion"> Transient confusion</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-30">
+            <p>30- A right carotid artery stenosis could not account for:</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="Contralateral hemiplegia"> Contralateral hemiplegia</label>
+                <label><input type="radio" name="q30" value="Contralateral hemisensory loss"> Contralateral hemisensory loss</label>
+                <label><input type="radio" name="q30" value="Drop attacks"> Drop attacks</label>
+                <label><input type="radio" name="q30" value="Dysphasia"> Dysphasia</label>
+                <label><input type="radio" name="q30" value="Right amaurosis fugax"> Right amaurosis fugax</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-31">
+            <p>31- A 56-year-old man presents to the Emergency Department after developing trouble talking after waking up this morning. The symptoms are consistent with expressive dysphasia and lasted about 90 minutes before resolving completely. Neurological examination is unremarkable. A diagnosis of transient ischaemic attack (TIA) is made. His past medical history includes ischaemic heart disease for which he is prescribed aspirin, simvastatin and atenolol. Which one of the following factors is most associated with an increased risk of going on to have a stroke?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="History of ischaemic heart disease"> History of ischaemic heart disease</label>
+                <label><input type="radio" name="q31" value="History of aspirin use"> History of aspirin use</label>
+                <label><input type="radio" name="q31" value="Duration of this TIA"> Duration of this TIA</label>
+                <label><input type="radio" name="q31" value="Expressive dysphasia during this TIA"> Expressive dysphasia during this TIA</label>
+                <label><input type="radio" name="q31" value="His age"> His age</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-32">
+            <p>32- A 72-year-old woman with a past history of treated hypertension presents to the Emergency Department. Yesterday she had a 2 hour episode where she couldn't find the right word when speaking. This has never happened before and there were no associated features. Neurological examination is unremarkable and blood pressure was 150/100 mmHg. Her only current medication is amlodipine. What is the most appropriate management?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="Aspirin 300mg immediately + specialist review within 2 weeks"> Aspirin 300mg immediately + specialist review within 2 weeks</label>
+                <label><input type="radio" name="q32" value="Specialist review within 2 weeks"> Specialist review within 2 weeks</label>
+                <label><input type="radio" name="q32" value="Aspirin 300mg immediately + specialist review within 24 hours"> Aspirin 300mg immediately + specialist review within 24 hours</label>
+                <label><input type="radio" name="q32" value="Aspirin 75mg f outpatient CT brain"> Aspirin 75mg f outpatient CT brain</label>
+                <label><input type="radio" name="q32" value="Specialist review within 24 hours"> Specialist review within 24 hours</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-33">
+            <p>33- An 81 year old woman with diabetes, hypertension and a minor left hemisphere ischaemic stroke 1 week ago is found to have a right carotid artery stenosis of 70%. Which of the following features would cause you to advise best medical therapy rather than carotid endarterectomy?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="Her age - she is too old to benefit"> Her age - she is too old to benefit</label>
+                <label><input type="radio" name="q33" value="She has a history of diabetes"> She has a history of diabetes</label>
+                <label><input type="radio" name="q33" value="The carotid stenosis is on the asymptomatic side"> The carotid stenosis is on the asymptomatic side</label>
+                <label><input type="radio" name="q33" value="The stroke impact is only minor"> The stroke impact is only minor</label>
+                <label><input type="radio" name="q33" value="There has been too long a delay since her stroke onset"> There has been too long a delay since her stroke onset</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-34">
+            <p>34- How long should a patient stop driving for following a stroke?</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="No restriction unless physical/visual impairment"> No restriction unless physical/visual impairment</label>
+                <label><input type="radio" name="q34" value="1 month"> 1 month</label>
+                <label><input type="radio" name="q34" value="3 month"> 3 months</label>
+                <label><input type="radio" name="q34" value="6 months"> 6 months</label>
+                <label><input type="radio" name="q34" value="12 months"> 12 months</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-35">
+            <p>35- A 62-year-old man is seen in the rapid access transient ischaemic attack clinic following three episodes over the past two weeks of transient left sided weakness. What is the most appropriate advice to give with regards to driving?</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="Cannot drive for 12 months"> Cannot drive for 12 months</label>
+                <label><input type="radio" name="q35" value="Cannot drive until investigations complete"> Cannot drive until investigations complete</label>
+                <label><input type="radio" name="q35" value="Inform DVLA but can continue driving"> Inform DVLA but can continue driving</label>
+                <label><input type="radio" name="q35" value="Cannot drive for 3 months"> Cannot drive for 3 months</label>
+                <label><input type="radio" name="q35" value="Cannot drive for 1 month"> Cannot drive for 1 month</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-36">
+            <p>36- A 21-year-old female is seen in the first seizure clinic in the outpatient department. Both the EEG and MRI brain are normal. A decision is made not to start her on anti-epileptic medication. What restrictions on driving should she be informed about?</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="No restrictions but inform DVLA"> No restrictions but inform DVLA</label>
+                <label><input type="radio" name="q36" value="No restrictions, no need to inform DVLA if not on medication"> No restrictions, no need to inform DVLA if not on medication</label>
+                <label><input type="radio" name="q36" value="Cannot drive for 1 month from date of seizure"> Cannot drive for 1 month from date of seizure</label>
+                <label><input type="radio" name="q36" value="Cannot drive for 6 months from date of seizure"> Cannot drive for 6 months from date of seizure</label>
+                <label><input type="radio" name="q36" value="Cannot drive for 1 year from date of seizure"> Cannot drive for 1 year from date of seizure</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-37">
+            <p>37- A 70 year old man is admitted overnight with a 24-hour history of left hemiparesis. Which one of these drug therapies would mandate urgent computed tomography (CT) head scanning?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="Aspirin"> Aspirin</label>
+                <label><input type="radio" name="q37" value="Clopidogrel"> Clopidogrel</label>
+                <label><input type="radio" name="q37" value="Ramipril"> Ramipril</label>
+                <label><input type="radio" name="q37" value="Simvastatin"> Simvastatin</label>
+                <label><input type="radio" name="q37" value="Warfarin"> Warfarin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-38">
+            <p>38- A 72-year-old man presents to the Emergency Department. Whilst walking back from a friends house he slipped on some ice and fell backwards landing on his right arm and banging his head on the kerb. Past medical history includes atrial fibrillation for which he takes bisoprolol and warfarin. A routine INR taken four days ago was 2.2. There are no signs of any external injury to his right arm or scalp. What is the most appropriate course of action with relation to his head injury?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="Arrange a CT head scan to be performed within 8 hours"> Arrange a CT head scan to be performed within 8 hours</label>
+                <label><input type="radio" name="q38" value="Discharge with standard head injury advice"> Discharge with standard head injury advice</label>
+                <label><input type="radio" name="q38" value="Admit for 24 hours of observation"> Admit for 24 hours of observation</label>
+                <label><input type="radio" name="q38" value="Admit for 8 hours of observation"> Admit for 8 hours of observation</label>
+                <label><input type="radio" name="q38" value="Discharge with standard head injury advice + advise he stops warfarin for 5 days"> Discharge with standard head injury advice + advise he stops warfarin for 5 days</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-39">
+            <p>39- A 38 year old man is brought to the emergency department with a suspected intracerebral haemorrhage. Which of the following are recognised risk factors for intracerebral haemorrhage?</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="Antiphospholipid abnormality"> Antiphospholipid abnormality</label>
+                <label><input type="radio" name="q39" value="Cardiac embolism"> Cardiac embolism</label>
+                <label><input type="radio" name="q39" value="Carotid artery stenosis"> Carotid artery stenosis</label>
+                <label><input type="radio" name="q39" value="Cocaine use"> Cocaine use</label>
+                <label><input type="radio" name="q39" value="Raised cholesterol"> Raised cholesterol</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-40">
+            <p>40- A 12-year-old boy is brought to the Emergency Department. He was hit on the side of the head by a cricket ball during a match. His teacher describes him initially collapsing to the ground and complaining of a sore head. After two minutes he got up said he felt OK and continued playing. After 30 minutes he suddenly collapsed to the ground and lost consciousness. What type of injury is he most likely to have sustained?</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="Cerebral contusion"> Cerebral contusion</label>
+                <label><input type="radio" name="q40" value="Subarachnoid haemorrhage"> Subarachnoid haemorrhage</label>
+                <label><input type="radio" name="q40" value="Intraventricular haemorrhage"> Intraventricular haemorrhage</label>
+                <label><input type="radio" name="q40" value="Extradural haematoma"> Extradural haematoma</label>
+                <label><input type="radio" name="q40" value="Subdural haematoma"> Subdural haematoma</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-41">
+            <p>41- A 73-year-old female with a history of recurrent falls at home and alcohol excess is brought to the Emergency Department due to episodes of confusion over the past 5 days. Between these episodes she is apparently her normal self. On examination her GCS is 14/15 and she has nystagmus on left lateral gaze. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q41" value="Subdural haemorrhage"> Subdural haemorrhage</label>
+                <label><input type="radio" name="q41" value="Subarachnoid haemorrhage"> Subarachnoid haemorrhage</label>
+                <label><input type="radio" name="q41" value="Meningitis"> Meningitis</label>
+                <label><input type="radio" name="q41" value="Herpes simplex encephalitis"> Herpes simplex encephalitis</label>
+                <label><input type="radio" name="q41" value="Alzheimer's disease"> Alzheimer's disease</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-42">
+            <p>42- A 43 year old woman attends the hospital accident and emergency department with a 1-hour history of sudden-onset severe occipital headache. On examination she is photophobic with neck stiffness. What is the most appropriate first-line investigation?</p>
+            <div class="options">
+                <label><input type="radio" name="q42" value="Carotid Doppler ultrasound (duplex) scan"> Carotid Doppler ultrasound (duplex) scan</label>
+                <label><input type="radio" name="q42" value="CT cerebral angiography"> CT cerebral angiography</label>
+                <label><input type="radio" name="q42" value="CT head scan"> CT head scan</label>
+                <label><input type="radio" name="q42" value="Lumbar puncture"> Lumbar puncture</label>
+                <label><input type="radio" name="q42" value="Skull X-ray"> Skull X-ray</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-43">
+            <p>43- A 34-year-old female presents with vomiting preceded by an occipital headache of acute onset. On examination she was conscious and alert with photophobia but no neck stiffness. CT brain is reported as normal. What is the most appropriate further management?</p>
+            <div class="options">
+                <label><input type="radio" name="q43" value="CT brain with contrast"> CT brain with contrast</label>
+                <label><input type="radio" name="q43" value="Repeat CT brain in 24h"> Repeat CT brain in 24h</label>
+                <label><input type="radio" name="q43" value="CSF examination"> CSF examination</label>
+                <label><input type="radio" name="q43" value="Cerebral angiography"> Cerebral angiography</label>
+                <label><input type="radio" name="q43" value="MRI brain"> MRI brain</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-44">
+            <p>44- A 23-year-old man is admitted following the sudden onset of an occipital headache. On examination GCS is 15/15. neurological examination is unremarkable but neck stiffness is noted. subarachnoid haemorrhage is suspected but the CT scan is normal. At what time should a lumbar puncture be done to exclude the diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q44" value="Immediately"> Immediately</label>
+                <label><input type="radio" name="q44" value="2 hours post-headache"> 2 hours post-headache</label>
+                <label><input type="radio" name="q44" value="4 hours post-headache"> 4 hours post-headache</label>
+                <label><input type="radio" name="q44" value="12 hours post-headache"> 12 hours post-headache</label>
+                <label><input type="radio" name="q44" value="24 hours post-headache"> 24 hours post-headache</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-45">
+            <p>45- 5-year-old boy is diagnosed as having absence seizures. What is the chance he will be seizure free by the age of 16-years-old?</p>
+            <div class="options">
+                <label><input type="radio" name="q45" value="5-10%"> 5-10%</label>
+                <label><input type="radio" name="q45" value="20-25%"> 20-25%</label>
+                <label><input type="radio" name="q45" value="40-45%"> 40-45%</label>
+                <label><input type="radio" name="q45" value="65-70%"> 65-70%</label>
+                <label><input type="radio" name="q45" value="90-95%"> 90-95%</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-46">
+            <p>46- 34-year-old female is reviewed in the neurology clinic due to a number of 'funny-dos'. She describes a sensation that her surroundings are unreal, 'like a dream'. Following this she has been told that she starts to smack her lips, though she has no recollection of doing this. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q46" value="Myoclonic seizure"> Myoclonic seizure</label>
+                <label><input type="radio" name="q46" value="Simple partial seizure"> Simple partial seizure</label>
+                <label><input type="radio" name="q46" value="Complex partial seizure"> Complex partial seizure</label>
+                <label><input type="radio" name="q46" value="Partial seizure progressing to generalised seizure"> Partial seizure progressing to generalised seizure</label>
+                <label><input type="radio" name="q46" value="Absence seizure"> Absence seizure</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-47">
+            <p>47- 27-year-old man presents with a history of fits consistent with tonic-clonic seizures. What is the most suitable first-line treatment?</p>
+            <div class="options">
+                <label><input type="radio" name="q47" value="Gabapentin"> Gabapentin</label>
+                <label><input type="radio" name="q47" value="Lamotrigine"> Lamotrigine</label>
+                <label><input type="radio" name="q47" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q47" value="Carbamazepine"> Carbamazepine</label>
+                <label><input type="radio" name="q47" value="Phenytoin"> Phenytoin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-48">
+            <p>48- 19-year-old man is diagnosed as having myoclonic seizures. What is the most appropriate first-line antiepileptic?</p>
+            <div class="options">
+                <label><input type="radio" name="q48" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q48" value="Carbamazepine"> Carbamazepine</label>
+                <label><input type="radio" name="q48" value="Topiramate"> Topiramate</label>
+                <label><input type="radio" name="q48" value="Clonazepam"> Clonazepam</label>
+                <label><input type="radio" name="q48" value="Ethosuximide"> Ethosuximide</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-49">
+            <p>49- 34-year-old man is reviewed in the neurology clinic. He has been established on sodium valproate for primary generalised epilepsy. Despite now taking a therapeutic dose he continues to have seizures and is troubled by weight gain since starting sodium valproate. He asks to stop his current medication and try a different drug. Which one of the following drugs would be the most appropriate second-line treatment?</p>
+            <div class="options">
+                <label><input type="radio" name="q49" value="Lamotrigine"> Lamotrigine</label>
+                <label><input type="radio" name="q49" value="Ethosuximide"> Ethosuximide</label>
+                <label><input type="radio" name="q49" value="Pregabalin"> Pregabalin</label>
+                <label><input type="radio" name="q49" value="Gabapentin"> Gabapentin</label>
+                <label><input type="radio" name="q49" value="Tiagabine"> Tiagabine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-50">
+            <p>50- 23-year-old man with difficult to control epilepsy is reviewed in clinic four months after a change in his antiepileptic medication. He has remained seizure free but has gained 5 Kg in weight since last reviewed. Which one of the following antiepileptic drugs is most associated with weight gain?</p>
+            <div class="options">
+                <label><input type="radio" name="q50" value="Ethosuximide"> Ethosuximide</label>
+                <label><input type="radio" name="q50" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q50" value="Levetiracetam"> Levetiracetam</label>
+                <label><input type="radio" name="q50" value="Carbamazepine"> Carbamazepine</label>
+                <label><input type="radio" name="q50" value="Lamotrigine"> Lamotrigine</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-51">
+            <p>51- 34 year old female with a history of primary generalised epilepsy asks for advice in the neurology clinic as she plans to start a family. She currently takes sodium valproate as monotherapy. What advice should be given regarding the prevention of neural tube defects?</p>
+            <div class="options">
+                <label><input type="radio" name="q51" value="Folic acid 400 mcg per day once pregnancy has been confirmed"> Folic acid 400 mcg per day once pregnancy has been confirmed</label>
+                <label><input type="radio" name="q51" value="Folic acid 1 mg per day once pregnancy has been confirmed"> Folic acid 1 mg per day once pregnancy has been confirmed</label>
+                <label><input type="radio" name="q51" value="Folic acid 5 mg per day starting now"> Folic acid 5 mg per day starting now</label>
+                <label><input type="radio" name="q51" value="Folic acid 10 mg per day starting now"> Folic acid 10 mg per day starting now</label>
+                <label><input type="radio" name="q51" value="Folic acid 400 mcg per day starting now"> Folic acid 400 mcg per day starting now</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-52">
+            <p>52- Antiepileptic medication is known to increase the risk of congenital defects. Which one of the following medications is thought to be associated with the lowest risk?</p>
+            <div class="options">
+                <label><input type="radio" name="q52" value="Levetiracetam"> Levetiracetam</label>
+                <label><input type="radio" name="q52" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q52" value="Phenytoin"> Phenytoin</label>
+                <label><input type="radio" name="q52" value="Carbamazepine"> Carbamazepine</label>
+                <label><input type="radio" name="q52" value="Gabapentin"> Gabapentin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-53">
+            <p>53- Antiepileptic drug cause gum hypertrophy?</p>
+            <div class="options">
+                <label><input type="radio" name="q53" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q53" value="Carbamazepine"> Carbamazepine</label>
+                <label><input type="radio" name="q53" value="Lamotrigine"> Lamotrigine</label>
+                <label><input type="radio" name="q53" value="Phenytoin"> Phenytoin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-54">
+            <p>54- Which one of the following anti-epileptic drugs is most likely to cause visual field defects?</p>
+            <div class="options">
+                <label><input type="radio" name="q54" value="Lamotrigine"> Lamotrigine</label>
+                <label><input type="radio" name="q54" value="Phenytoin"> Phenytoin</label>
+                <label><input type="radio" name="q54" value="Ethosuximide"> Ethosuximide</label>
+                <label><input type="radio" name="q54" value="Vigabatrin"> Vigabatrin</label>
+                <label><input type="radio" name="q54" value="Pregabalin"> Pregabalin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-55">
+            <p>55- Which one of the following statements regarding the stopping of anti-epileptic drugs (AED) is most correct?</p>
+            <div class="options">
+                <label><input type="radio" name="q55" value="Can be considered if seizure free for > 5 years, with AEDs being stopped over 2-3 months"> Can be considered if seizure free for > 5 years, with AEDs being stopped over 2-3 months</label>
+                <label><input type="radio" name="q55" value="Can be considered if seizure free for > 2 years, with AEDs being stopped over 2-3 months"> Can be considered if seizure free for > 2 years, with AEDs being stopped over 2-3 months</label>
+                <label><input type="radio" name="q55" value="Can be considered if seizure free for > 1 year with AEDs being stopped over 2-3 months"> Can be considered if seizure free for > 1 year with AEDs being stopped over 2-3 months</label>
+                <label><input type="radio" name="q55" value="Can be considered if seizure free for > 5 years, with AEDs being stopped over 8-12 months"> Can be considered if seizure free for > 5 years, with AEDs being stopped over 8-12 months</label>
+                <label><input type="radio" name="q55" value="Can be considered if seizure free for > 1 year, with AEDs being stopped over 8-12 months"> Can be considered if seizure free for > 1 year, with AEDs being stopped over 8-12 months</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-56">
+            <p>56- 24-year-old man is seen in the 'First Seizure' clinic. He has been referred by the local Emergency Department following a single episode of a witnessed seizure. Which one of the following factors would be least relevant when deciding whether to start anti-epileptic drugs after a single seizure?</p>
+            <div class="options">
+                <label><input type="radio" name="q56" value="Brain imaging shows a structural abnormality"> Brain imaging shows a structural abnormality</label>
+                <label><input type="radio" name="q56" value="The patient has a neurological deficit"> The patient has a neurological deficit</label>
+                <label><input type="radio" name="q56" value="The EEG shows unequivocal epileptic activity"> The EEG shows unequivocal epileptic activity</label>
+                <label><input type="radio" name="q56" value="The patient is less than 45 years old"> The patient is less than 45 years old</label>
+                <label><input type="radio" name="q56" value="The patient considers the risk of having a further seizure unacceptable"> The patient considers the risk of having a further seizure unacceptable</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-57">
+            <p>57- 44-year-old woman presents with pain in her right hand and forearm which has been getting worse for the past few weeks. There is no history of trauma. The pain is concentrated around the thumb and index finger and is often worse at night. Shaking her hand seems to provide some relief. On examination there is weakness of the abductor pollicis brevis and reduced sensation to fine touch at the index finger. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q57" value="C6 entrapment neuropathy"> C6 entrapment neuropathy</label>
+                <label><input type="radio" name="q57" value="Thoracic outlet syndrome"> Thoracic outlet syndrome</label>
+                <label><input type="radio" name="q57" value="Carpal tunnel syndrome"> Carpal tunnel syndrome</label>
+                <label><input type="radio" name="q57" value="Cervical rib"> Cervical rib</label>
+                <label><input type="radio" name="q57" value="Pancoast's tumour"> Pancoast's tumour</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-58">
+            <p>58- Secretary complains of difficulty in writing and pain. By examination, there is weakness in lumbricals. Which is affected?</p>
+            <div class="options">
+                <label><input type="radio" name="q58" value="Thumb abduction"> Thumb abduction</label>
+                <label><input type="radio" name="q58" value="Loss of sensation in dorsum of middle fingers"> Loss of sensation in dorsum of middle fingers</label>
+                <label><input type="radio" name="q58" value="Wrist drop"> Wrist drop</label>
+                <label><input type="radio" name="q58" value="Meralgia"> Meralgia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-59">
+            <p>59- Which of the following does not produce wasting of small muscles of hands?</p>
+            <div class="options">
+                <label><input type="radio" name="q59" value="Myopathy"> Myopathy</label>
+                <label><input type="radio" name="q59" value="Rheumatoid arthritis"> Rheumatoid arthritis</label>
+                <label><input type="radio" name="q59" value="Cervical rib"> Cervical rib</label>
+                <label><input type="radio" name="q59" value="Carpal tunnel syndrome"> Carpal tunnel syndrome</label>
+                <label><input type="radio" name="q59" value="Pancoast tumour"> Pancoast tumour</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-60">
+            <p>60- Which does not produce wasting of small muscles of hands?</p>
+            <div class="options">
+                <label><input type="radio" name="q60" value="Duchenne muscular dystrophy"> Duchenne muscular dystrophy</label>
+                <label><input type="radio" name="q60" value="Thoracic inlet syndrome"> Thoracic inlet syndrome</label>
+                <label><input type="radio" name="q60" value="Rheumatoid arthritis"> Rheumatoid arthritis</label>
+                <label><input type="radio" name="q60" value="Amyotrophic lateral sclerosis"> Amyotrophic lateral sclerosis</label>
+                <label><input type="radio" name="q60" value="Diabetes"> Diabetes</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-61">
+            <p>61- 75-year-old female presents with weakness of her left hand. On examination wasting of the hypothenar eminence is seen and there is weakness of finger abduction. Thumb adduction is also weak. Where is the lesion most likely to be?</p>
+            <div class="options">
+                <label><input type="radio" name="q61" value="C7"> C7</label>
+                <label><input type="radio" name="q61" value="Median nerve"> Median nerve</label>
+                <label><input type="radio" name="q61" value="Radial nerve"> Radial nerve</label>
+                <label><input type="radio" name="q61" value="Anterior interosseous nerve"> Anterior interosseous nerve</label>
+                <label><input type="radio" name="q61" value="Ulnar nerve"> Ulnar nerve</label>
+            </div>
+        </div>
+
+        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button class="btn" id="submitBtn" onclick="evaluateQuiz()" style="display: none;">Submit Quiz</button>
+
+        <div class="result" id="result">
+            <h2>Results</h2>
+            <div id="score"></div>
+            <div id="answers-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        // إضافة حدث للكيبورد لمنع حفظ الصفحة
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && event.key === "s") {
+                event.preventDefault();
+                alert("تم منع حفظ الصفحة!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع فتح أدوات المطور
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                alert("تم تعطيل أدوات المطور!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع النقر بزر اليمين
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // يمنع فتح قائمة السياق
+            alert("النقر بزر الماوس الأيمن غير مسموح به.");
+        });
+
+        let currentQuestion = 1;
+        const totalQuestions = 61;
+        let score = 0;
+        let timerInterval;
+        const answers = {
+            q1: "Cataplexy",
+            q2: "It includes higher cerebral dysfunction and motor loss",
+            q3: "Cortex",
+            q4: "Calcification within a lesion",
+            q5: "B and D",
+            q6: "Middle cerebral artery",
+            q7: "Right homonymous hemianopia",
+            q8: "Seizure",
+            q9: "A family history of major psychiatric illness",
+            q10: "Fasciculations",
+            q11: "Brisk deep reflexes",
+            q12: "Reliably detects intracerebral blood",
+            q13: "Check blood glucose level",
+            q14: "BP 210/110",
+            q15: "Aspirin",
+            q16: "Warfarin",
+            q17: "Lower drug costs",
+            q18: "Clopidogrel + statin",
+            q19: "Aspirin + dipyridamole lifelong",
+            q20: "It improves the chance of recovery of independence",
+            q21: "It is effective in large-vessel occlusion",
+            q22: "AF",
+            q23: "Libman sacks endocarditis",
+            q24: "Tricuspid incompetence with occasional ectopics",
+            q25: "Ostium secundum atrial septal defect",
+            q26: "Embolic",
+            q27: "slurred speech",
+            q28: "Dysarthria",
+            q29: "Expressive dysphasia",
+            q30: "Drop attacks",
+            q31: "Duration of this TIA",
+            q32: "Aspirin 300mg immediately + specialist review within 24 hours",
+            q33: "The carotid stenosis is on the asymptomatic side",
+            q34: "1 month",
+            q35: "3 months",
+            q36: "6 months from date of seizure",
+            q37: "Warfarin",
+            q38: "Arrange a CT head scan to be performed within 8 hours",
+            q39: "Cocaine use",
+            q40: "Extradural haematoma",
+            q41: "Subdural haemorrhage",
+            q42: "CT head scan",
+            q43: "CSF examination",
+            q44: "12 hours post-headache",
+            q45: "90-95%",
+            q46: "Complex partial seizure",
+            q47: "Sodium valproate",
+            q48: "Sodium valproate",
+            q49: "Lamotrigine",
+            q50: "Sodium valproate",
+            q51: "Folic acid 5 mg per day starting now",
+            q52: "Carbamazepine",
+            q53: "Phenytoin",
+            q54: "Vigabatrin",
+            q55: "Can be considered if seizure free for > 2 years, with AEDs being stopped over 2-3 months",
+            q56: "The patient is less than 45 years old",
+            q57: "Carpal tunnel syndrome",
+            q58: "Thumb abduction",
+            q59: "Myopathy",
+            q60: "Rheumatoid arthritis",
+            q61: "Ulnar nerve"
+        };
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach((q, index) => {
+                q .style.display = index + 1 === currentQuestion ? 'block' : 'none';
+            });
+            document.getElementById('nextBtn').style.display = currentQuestion < totalQuestions ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            clearInterval(timerInterval);
+            startTimer();
+            showQuestion();
+        }
+
+        function startTimer() {
+            let timeRemaining = 60;
+            document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    if (currentQuestion < totalQuestions) {
+                        nextQuestion();
+                    } else {
+                        evaluateQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function evaluateQuiz() {
+            score = 0;
+            let summary = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionElement = document.getElementById(`question-${i}`);
+                const options = document.querySelectorAll(`input[name="q${i}"]`);
+                let questionSummary = `<p><strong>Question ${i}: </strong>${questionElement.querySelector('p').innerText}</p>`;
+
+                options.forEach(option => {
+                    const optionLabel = option.parentElement;
+                    if (option.value === correctAnswer) {
+                        optionLabel.style.color = 'green';
+                    } else if (selectedOption && selectedOption.value === option.value) {
+                        optionLabel.style.color = 'red';
+                    }
+                });
+
+                questionSummary += `<div>Answer: <strong>${selectedOption ? selectedOption.value : 'None selected'}</strong></div>`;
+                questionSummary += `<div>Correct answer: <strong>${correctAnswer}</strong></div>`;
+
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    summary += questionSummary + `<p class="correct">Correct</p>`;
+                } else {
+                    summary += questionSummary + `<p class="incorrect">Incorrect</p>`;
+                }
+            }
+
+            document.getElementById('score').textContent = `Your score: ${score} out of ${totalQuestions}`;
+            document.getElementById('answers-summary').innerHTML = summary;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timer').style.display = 'none'; 
+            document.querySelectorAll('.question').forEach((q) => q.style.display = 'none');
+
+            clearInterval(timerInterval);
+        }
+
+        window.onload = function() {
+            showQuestion();
+            startTimer();
+        };
+        
+        
+        function nextQuestion() {
+    // Increase the current question counter
+            currentQuestion++;
+
+            // Reset the timer
+            clearInterval(timerInterval); // Stop the current timer
+            startTimer(); // Start the timer from the beginning
+
+            // Show the next question
+            showQuestion();
+        }
+        
+    </script>
+</body>
+</html>
